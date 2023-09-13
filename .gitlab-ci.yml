@@ -1,0 +1,36 @@
+image: gitlab/dind # sử dụng môi trường gitlab
+services:
+  - docker:dind # sử dụng docker để run các thành phần bên dưới
+
+variables:
+  IMAGE_NAME: dungnguyen251001/net.java.jenkins:0.0.0.1 # iamge mà các bạn vừa tạo, nhớ thay tên username và tên image bạn vừa tạo ở trên
+
+stages: # định nghĩa các bước, ở đây minhd có 3 bước tương ứng như bên dưới
+  - build
+  - test
+  - docker
+
+maven-build: # đây chính là bước build file .jar mà mình đã đề cập ở bên trên
+  image: maven:3.8.1-openjdk-17-slim
+  stage: build
+  script: "./mvn clean package"
+  artifacts:
+    paths:
+      - target/*.jar
+
+maven-test: # run unit test của project
+  image: maven:3.8.1-openjdk-17-slim
+  stage: test
+  script: "mvn test"
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker-build: # bước này sẽ build iamge từ Dockerfile và push lên docker hub
+  stage: docker
+  script:
+    - docker login -u $USERNAME_DOCKER -p $PASSWORD_DOCKER # nhập tên username và password docker hub của các bạn ở đây để có quyền push
+    - docker build -t $IMAGE_NAME:0.0.0.1 . # build image, 1.0 là tag coi nó như version
+    - docker push $IMAGE_NAME:0.0.0.1 # push image docker hub sau khi build thành công
+
+
