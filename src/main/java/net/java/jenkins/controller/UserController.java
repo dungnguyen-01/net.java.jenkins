@@ -24,9 +24,13 @@ public class UserController {
 		users.add(new User("Nguyen Van B", 21));
 		users.add(new User("Nguyen Van C", 20));	
 		users.add(new User("Nguyen Van D", 29));
+		users.add(new User("Nguyen Van E", 50));
 		
 		return new ResponseEntity<>(users, HttpStatus.OK);
 	}
+
+
+
 
 }
 
