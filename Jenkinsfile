@@ -15,7 +15,6 @@ pipeline {
         }
 
         stage('Packaging/Pushing image') {
-
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
                     sh 'docker build -t dungnguyen251001/net.java.jenkins:0.0.0.1 .'
@@ -24,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('Deploy Spring Boot to DEV')
+        stage('Deploy Spring Boot to DEV') {
             steps {
                 echo 'Deploying and Cleaning'
                 sh 'docker pull dungnguyen251001/net.java.jenkins:0.0.0.1'
@@ -32,10 +31,10 @@ pipeline {
                 sh 'echo y | docker container prune'
                 sh 'docker run -dp 6060:6060 --name net.java.jenkins_container net.java.jenkins:0.0.0.1 '
             }
+        }
     }
 
     post {
-        // Clean after build
         always {
             cleanWs()
         }
