@@ -60,7 +60,7 @@ pipeline {
                 sh 'docker pull dungnguyen251001/net.java.jenkins:0.0.0.1'
                 sh 'docker stop net.java.jenkins_container || echo "this container does not exist"'
                 sh 'echo y | docker container prune'
-                sh 'docker run -dp 6060:6060 --name net.java.jenkins_container dungnguyen251001/net.java.jenkins '
+                sh 'docker run -dp 6060:6060 --name net.java.jenkins_container dungnguyen251001/net.java.jenkins:0.0.0.1 '
             }
         }
     }
