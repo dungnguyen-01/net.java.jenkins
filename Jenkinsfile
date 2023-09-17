@@ -34,7 +34,7 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                sh 'docker --version'
+                echo 'docker --version'
                 script {
                     // Push the Docker image
                     //sh 'docker push dungnguyen251001/net.java.jenkins:0.0.0.1'
