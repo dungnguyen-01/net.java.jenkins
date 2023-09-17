@@ -15,8 +15,6 @@ pipeline {
     stages {
         stage('Build with maven') {
             steps {
-                echo 'docker --version'
-                sh 'docker --version'
                 sh 'mvn --version'
                 sh 'java --version'
                 sh 'mvn clean'
