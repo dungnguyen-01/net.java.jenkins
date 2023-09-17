@@ -15,6 +15,8 @@ pipeline {
     stages {
         stage('Build with maven') {
             steps {
+                echo 'docker --version'
+                sh 'docker --version'
                 sh 'mvn --version'
                 sh 'java --version'
                 sh 'mvn clean'
@@ -34,7 +36,6 @@ pipeline {
 
         stage('Push Docker Image') {
             steps {
-                echo 'docker --version'
                 script {
                     // Push the Docker image
                     //sh 'docker push dungnguyen251001/net.java.jenkins:0.0.0.1'
