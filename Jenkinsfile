@@ -27,8 +27,8 @@ pipeline {
         stage('Deploy Spring Boot to DEV')
             steps {
                 echo 'Deploying and Cleaning'
-                sh 'docker image pull dungnguyen251001/net.java.jenkins:0.0.0.1'
-                sh 'docker container stop net.java.jenkins_container || echo "this container does not exist"'
+                sh 'docker pull dungnguyen251001/net.java.jenkins:0.0.0.1'
+                sh 'docker stop net.java.jenkins_container || echo "this container does not exist"'
                 sh 'echo y | docker container prune'
                 sh 'docker run -dp 6060:6060 --name net.java.jenkins_container net.java.jenkins:0.0.0.1 '
             }
