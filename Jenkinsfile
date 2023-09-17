@@ -40,7 +40,7 @@ pipeline {
                     // Push the Docker image
                     //sh 'docker push dungnguyen251001/net.java.jenkins:0.0.0.1'
 
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withDockerRegistry( 'https://index.docker.io/v1/', registryCredential ) {
                     dockerImage.push()
                     }
                 }
