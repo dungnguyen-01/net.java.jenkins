@@ -19,7 +19,7 @@ pipeline {
         stage('Packaging/Pushing image') {
             steps {
                 withDockerRegistry(credentialsId: 'dockerhub', url: 'https://index.docker.io/v1/') {
-                    sh 'docker build -t dungnguyen251001/net.java.jenkins:0.0.0.1 .'
+                    sh 'docker build -t net.java.jenkins:0.0.0.1 .'
                     sh 'docker push dungnguyen251001/net.java.jenkins:0.0.0.1'
                 }
             }
